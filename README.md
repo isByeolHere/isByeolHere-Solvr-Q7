@@ -1,85 +1,50 @@
-# 풀스택 서비스 보일러 플레이트
+# GitHub Release Statistics Dashboard
 
-## 프로젝트 개요
+## 대시보드 소개
 
-이 보일러 플레이트는 풀스택 웹 애플리케이션 개발을 위한 기본 구조를 제공합니다. monorepo 구조로 클라이언트와 서버를 효율적으로 관리하며, 현대적인 웹 개발 기술 스택을 활용합니다.
+이 대시보드는 당근 로컬팀의 GitHub 릴리즈 통계를 시각화하여 보여줍니다.
 
-## 기술 스택
+### 주요 기능
 
-### 공통
+1. **통계 뷰**
 
-- 패키지 매니저: pnpm (workspace 기능 활용)
-- 언어: TypeScript
-- Node.js 버전: 22.x
-- 테스트: Vitest
-- 코드 품질: Prettier
+   - 각 저장소별 릴리스 통계를 보여줍니다
+   - 총 릴리스 수, 연간/월간/주간/일간 릴리스 수를 확인할 수 있습니다
+   - 마지막 업데이트 시간을 표시합니다
 
-### 클라이언트
+2. **원본 데이터 뷰**
+   - 모든 릴리스의 상세 정보를 확인할 수 있습니다
+   - 저장소, 태그명, 릴리스명, 발행일, 작성자, 릴리스 내용을 포함합니다
+   - 시간순으로 정렬되어 있어 최신 릴리스를 쉽게 확인할 수 있습니다
 
-- 프레임워크: React
-- 빌드 도구: Vite
-- 라우팅: React Router
-- 스타일링: TailwindCSS
+### 기술 스택
 
-### 서버
+- Frontend: React, TypeScript
+- UI Components: shadcn/ui
+- Styling: Tailwind CSS
 
-- 프레임워크: Fastify
-- 데이터베이스: SQLite with DirzzleORM
+### 사용 방법
 
-## 설치 및 실행
-
-### 초기 설치
+1. 서버 실행
 
 ```bash
-# 프로젝트 루트 디렉토리에서 실행
-pnpm install
+cd server
+npm install
+npm run dev
 ```
 
-### 개발 서버 실행
+2. 클라이언트 실행
 
 ```bash
-# 클라이언트 및 서버 동시 실행
-pnpm dev
-
-# 클라이언트만 실행
-pnpm dev:client
-
-# 서버만 실행
-pnpm dev:server
+cd client
+npm install
+npm run dev
 ```
 
-### 테스트 실행
+3. 웹 브라우저에서 `http://localhost:5173` 접속
 
-```bash
-# 클라이언트 테스트
-pnpm test:client
+### 데이터 업데이트
 
-# 서버 테스트
-pnpm test:server
-
-# 모든 테스트 실행
-pnpm test
-```
-
-### 빌드
-
-```bash
-# 클라이언트 및 서버 빌드
-pnpm build
-```
-
-## 환경 변수 설정
-
-- 클라이언트: `client/.env` 파일에 설정 (예시는 `client/.env.example` 참조)
-- 서버: `server/.env` 파일에 설정 (예시는 `server/.env.example` 참조)
-
-## API 엔드포인트
-
-서버는 다음과 같은 기본 API 엔드포인트를 제공합니다:
-
-- `GET /api/health`: 서버 상태 확인
-- `GET /api/users`: 유저 목록 조회
-- `GET /api/users/:id`: 특정 유저 조회
-- `POST /api/users`: 새 유저 추가
-- `PUT /api/users/:id`: 유저 정보 수정
-- `DELETE /api/users/:id`: 유저 삭제
+- 서버는 GitHub API를 통해 최신 릴리스 데이터를 가져옵니다
+- 데이터는 CSV 형식으로 저장되며, 클라이언트에서 이를 파싱하여 표시합니다
+- 실시간 업데이트를 위해 서버를 재시작하면 최신 데이터를 확인할 수 있습니다
