@@ -9,7 +9,11 @@ export class GitHubService {
     if (!response.ok) {
       throw new Error(`Failed to fetch releases for ${repo}`)
     }
-    return response.json()
+    const releases = await response.json()
+    return releases.map((release: Release) => ({
+      ...release,
+      repository: repo
+    }))
   }
 
   private calculateStats(releases: Release[]): ReleaseStats {
