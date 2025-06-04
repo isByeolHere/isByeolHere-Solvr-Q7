@@ -1,6 +1,7 @@
 # GitHub Release Statistics Dashboard
 
-GitHub 저장소의 릴리스 통계를 시각화하는 대시보드입니다.
+당근 로컬팀의 GitHub 저장소의 릴리스 통계를 시각화하는 대시보드입니다.
+<img width="783" alt="스크린샷 2025-06-04 오후 5 13 47" src="https://github.com/user-attachments/assets/d6c5eb87-ea89-412a-bb6b-3bd7dedcb7a0" />
 
 ## 주요 기능
 
