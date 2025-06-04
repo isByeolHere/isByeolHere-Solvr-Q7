@@ -1,13 +1,13 @@
 # GitHub Release Statistics Dashboard
 
-당근 로컬팀의 GitHub 저장소의 릴리스 통계를 시각화하는 대시보드입니다.
+당근 로컬팀의 GitHub 저장소의 릴리즈 통계를 시각화하는 대시보드입니다.
 <img width="783" alt="스크린샷 2025-06-04 오후 5 13 47" src="https://github.com/user-attachments/assets/d6c5eb87-ea89-412a-bb6b-3bd7dedcb7a0" />
 
 ## 주요 기능
 
-- 저장소별 릴리스 통계 시각화
-- 연간/월간/주간/일간 릴리스 수 추적
-- 원본 릴리스 데이터 표시
+- 레포지토리별 릴리즈 통계 시각화
+- 연간/월간/주간/일간 릴리즈 수 추적
+- 원본 릴리즈 데이터 표시
 - CSV 형식의 데이터 다운로드
 
 ## 기술 스택
@@ -39,7 +39,7 @@
 ### 서버
 
 - Fastify 기반의 백엔드 서버
-- GitHub API를 통해 릴리스 데이터 수집
+- GitHub API를 통해 릴리즈 데이터 수집
 - 데이터 가공 및 통계 계산
 - CSV 파일 생성 및 관리
 - RESTful API 엔드포인트 제공
@@ -66,12 +66,12 @@ npm run dev
 
 ### GET /api/github/release-stats
 
-릴리스 통계 정보를 반환합니다.
+릴리즈 통계 정보를 반환합니다.
 
 ### GET /api/github/release-stats/csv
 
-CSV 형식의 릴리스 데이터를 반환합니다.
+CSV 형식의 릴리즈 데이터를 반환합니다.
 
 ## 데이터 업데이트
 
-서버는 구동 시 GitHub API를 통해 최신 릴리스 데이터를 가져와 CSV 파일로 저장합니다. 이 데이터는 클라이언트의 요청에 따라 API를 통해 제공됩니다
+서버는 구동 시 GitHub API를 통해 최신 릴리즈 데이터를 가져와 CSV 파일로 저장합니다. 이 데이터는 클라이언트의 요청에 따라 API를 통해 제공됩니다
