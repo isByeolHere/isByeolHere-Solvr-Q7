@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 interface ReleaseStats {
@@ -84,46 +85,82 @@ export default function ReleaseStatsPage() {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-8 text-center">GitHub Release Statistics</h1>
-      <Tabs defaultValue="stats" className="w-full">
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="stats">통계</TabsTrigger>
-          <TabsTrigger value="raw">원본 데이터</TabsTrigger>
-        </TabsList>
-        <TabsContent value="stats">
-          <div className="space-y-4">
-            {stats.map(stat => (
-              <div key={stat.repository} className="p-4 border rounded-lg">
-                <h2 className="text-xl font-bold mb-2">{stat.repository}</h2>
+
+      {/* 통계 섹션 */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-bold mb-6">릴리스 통계</h2>
+        <div className="grid gap-6">
+          {stats.map(stat => (
+            <Card key={stat.repository}>
+              <CardHeader>
+                <CardTitle>{stat.repository}</CardTitle>
+              </CardHeader>
+              <CardContent>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  <div>Total Releases: {stat.total}</div>
-                  <div>Yearly Releases: {stat.yearly}</div>
-                  <div>Monthly Releases: {stat.monthly}</div>
-                  <div>Weekly Releases: {stat.weekly}</div>
-                  <div>Daily Releases: {stat.daily}</div>
-                  <div>Last Updated: {stat.lastUpdated}</div>
+                  <div className="bg-blue-50 p-4 rounded-lg">
+                    <div className="text-sm text-blue-600 font-medium">Total Releases</div>
+                    <div className="text-3xl font-bold text-blue-700">{stat.total}</div>
+                  </div>
+                  <div className="bg-green-50 p-4 rounded-lg">
+                    <div className="text-sm text-green-600 font-medium">Yearly Releases</div>
+                    <div className="text-3xl font-bold text-green-700">{stat.yearly}</div>
+                  </div>
+                  <div className="bg-yellow-50 p-4 rounded-lg">
+                    <div className="text-sm text-yellow-600 font-medium">Monthly Releases</div>
+                    <div className="text-3xl font-bold text-yellow-700">{stat.monthly}</div>
+                  </div>
+                  <div className="bg-purple-50 p-4 rounded-lg">
+                    <div className="text-sm text-purple-600 font-medium">Weekly Releases</div>
+                    <div className="text-3xl font-bold text-purple-700">{stat.weekly}</div>
+                  </div>
+                  <div className="bg-red-50 p-4 rounded-lg">
+                    <div className="text-sm text-red-600 font-medium">Daily Releases</div>
+                    <div className="text-3xl font-bold text-red-700">{stat.daily}</div>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <div className="text-sm text-gray-600 font-medium">Last Updated</div>
+                    <div className="text-xl text-gray-700">{stat.lastUpdated}</div>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </TabsContent>
-        <TabsContent value="raw">
-          <div className="space-y-4">
-            {rawReleases.map((release, index) => (
-              <div
-                key={`${release.repository}-${release.tagName}-${index}`}
-                className="p-4 border rounded-lg"
-              >
-                <div>Repository: {release.repository}</div>
-                <div>Tag Name: {release.tagName}</div>
-                <div>Name: {release.name}</div>
-                <div>Published At: {new Date(release.publishedAt).toLocaleString()}</div>
-                <div>Author: {release.author}</div>
-                <div className="whitespace-pre-wrap">Body: {release.body}</div>
-              </div>
-            ))}
-          </div>
-        </TabsContent>
-      </Tabs>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+
+      {/* 원본 데이터 섹션 */}
+      <div>
+        <h2 className="text-2xl font-bold mb-6">원본 데이터</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="bg-gray-100">
+                <th className="border p-2 text-left">Repository</th>
+                <th className="border p-2 text-left">Tag Name</th>
+                <th className="border p-2 text-left">Name</th>
+                <th className="border p-2 text-left">Published At</th>
+                <th className="border p-2 text-left">Author</th>
+                <th className="border p-2 text-left">Body</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rawReleases.map((release, index) => (
+                <tr
+                  key={`${release.repository}-${release.tagName}-${index}`}
+                  className="hover:bg-gray-50"
+                >
+                  <td className="border p-2">{release.repository}</td>
+                  <td className="border p-2">{release.tagName}</td>
+                  <td className="border p-2">{release.name}</td>
+                  <td className="border p-2">{new Date(release.publishedAt).toLocaleString()}</td>
+                  <td className="border p-2">{release.author}</td>
+                  <td className="border p-2 whitespace-pre-wrap">{release.body}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   )
 }
